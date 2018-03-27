@@ -2,7 +2,6 @@ package com.dji.sdk.sample.demo.mobileremotecontroller;
 
 import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
 import com.dji.sdk.sample.R;
-//import com.dji.sdk.sample.demo.ASRActivity;
 import com.dji.sdk.sample.internal.controller.DJISampleApplication;
 import com.dji.sdk.sample.internal.controller.MainActivity;
 import com.dji.sdk.sample.internal.utils.DialogUtils;
@@ -29,7 +28,11 @@ import com.ibm.watson.developer_cloud.android.library.audio.utils.ContentType;
 import com.ibm.watson.developer_cloud.speech_to_text.v1.SpeechToText;
 import com.ibm.watson.developer_cloud.speech_to_text.v1.model.RecognizeOptions;
 import com.ibm.watson.developer_cloud.speech_to_text.v1.model.SpeechResults;
+import com.ibm.watson.developer_cloud.speech_to_text.v1.model.Transcript;
 import com.ibm.watson.developer_cloud.speech_to_text.v1.websocket.BaseRecognizeCallback;
+
+import java.util.List;
+import java.util.concurrent.Semaphore;
 
 import dji.common.error.DJIError;
 import dji.common.flightcontroller.simulator.InitializationData;
@@ -43,12 +46,17 @@ import dji.sdk.flightcontroller.Simulator;
 import dji.sdk.mobilerc.MobileRemoteController;
 import dji.sdk.products.Aircraft;
 
+//import com.dji.sdk.sample.demo.ASRActivity;
+
 /**
  * Class for mobile remote controller.
  */
 public class MobileRemoteControllerView extends RelativeLayout
-    implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, PresentableView {
+        implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, PresentableView {
 
+    FlightController flightController = ModuleVerificationUtil.getFlightController();
+
+    Semaphore mutx = new Semaphore(1, true);
     private ToggleButton btnSimulator;
     private Button btnVoiceTest;
     private Button btnTakeOff;
@@ -133,7 +141,7 @@ public class MobileRemoteControllerView extends RelativeLayout
     }
 
     //********************************************************************************************
-    private void initServices(){
+    private void initServices() {
         speechService = initSpeechToTextService();
         microphoneHelper = new MicrophoneHelper(mainActivity);
     }
@@ -149,7 +157,7 @@ public class MobileRemoteControllerView extends RelativeLayout
 
     private RecognizeOptions getRecognizeOptions() {
         return new RecognizeOptions.Builder().continuous(true).contentType(ContentType.OPUS.toString())
-                .model("en-US_BroadbandModel").interimResults(true).inactivityTimeout(5000).build();
+                .model("en-US_BroadbandModel").interimResults(true).inactivityTimeout(50000).build();
     }
     //********************************************************************************************
 
@@ -160,17 +168,17 @@ public class MobileRemoteControllerView extends RelativeLayout
                 @Override
                 public void onUpdate(final SimulatorState djiSimulatorStateData) {
                     ToastUtils.setResultToText(textView,
-                                               "Yaw : "
-                                                   + djiSimulatorStateData.getYaw()
-                                                   + ","
-                                                   + "X : "
-                                                   + djiSimulatorStateData.getPositionX()
-                                                   + "\n"
-                                                   + "Y : "
-                                                   + djiSimulatorStateData.getPositionY()
-                                                   + ","
-                                                   + "Z : "
-                                                   + djiSimulatorStateData.getPositionZ());
+                            "Yaw : "
+                                    + djiSimulatorStateData.getYaw()
+                                    + ","
+                                    + "X : "
+                                    + djiSimulatorStateData.getPositionX()
+                                    + "\n"
+                                    + "Y : "
+                                    + djiSimulatorStateData.getPositionY()
+                                    + ","
+                                    + "Z : "
+                                    + djiSimulatorStateData.getPositionZ());
                 }
             });
         } else {
@@ -178,7 +186,7 @@ public class MobileRemoteControllerView extends RelativeLayout
         }
         try {
             mobileRemoteController =
-                ((Aircraft) DJISampleApplication.getAircraftInstance()).getMobileRemoteController();
+                    ((Aircraft) DJISampleApplication.getAircraftInstance()).getMobileRemoteController();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -251,7 +259,7 @@ public class MobileRemoteControllerView extends RelativeLayout
                                 speechService.recognizeUsingWebSocket(capture, getRecognizeOptions(),
                                         new MicrophoneRecognizeDelegate());
                             } catch (Exception e) {
-                                Toast.makeText(mainActivity,"Speech Capture error. "+e,Toast.LENGTH_LONG);
+                                Toast.makeText(mainActivity, "Speech Capture error. " + e, Toast.LENGTH_LONG);
                             }
                         }
                     }).start();
@@ -307,12 +315,12 @@ public class MobileRemoteControllerView extends RelativeLayout
 
             textView.setVisibility(VISIBLE);
             simulator.start(InitializationData.createInstance(new LocationCoordinate2D(23, 113), 10, 10),
-                            new CompletionCallback() {
-                                @Override
-                                public void onResult(DJIError djiError) {
+                    new CompletionCallback() {
+                        @Override
+                        public void onResult(DJIError djiError) {
 
-                                }
-                            });
+                        }
+                    });
         } else {
 
 //            textView.setVisibility(INVISIBLE);
@@ -332,88 +340,72 @@ public class MobileRemoteControllerView extends RelativeLayout
 
     private class MicrophoneRecognizeDelegate extends BaseRecognizeCallback {
 
+        String TAG = MicrophoneRecognizeDelegate.class.getSimpleName();
         @Override
         public void onTranscription(SpeechResults speechResults) {
-            System.out.println(speechResults);
-            if (speechResults.getResults() != null && !speechResults.getResults().isEmpty()) {
-                final String text = speechResults.getResults().get(0).getAlternatives().get(0).getTranscript();
-            Log.d("shit","*** "+text);
+            final List<Transcript> results = speechResults.getResults();
+            if (results != null && !results.isEmpty()) {
+                String text = results.get(0).getAlternatives().get(0).getTranscript();
+                final String displayText = text;
+                if (!text.isEmpty()) {
+                    text = text.trim();
+                }
+
+                Log.d(TAG, "Text recrodnized as " + text);
+
                 mainActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textView.setText(text);
+                        textView.setText(displayText);
                     }
                 });
 
-
-                FlightController flightController = ModuleVerificationUtil.getFlightController();
-                if (flightController == null) {
-                    return;
+                if (text.equalsIgnoreCase("up")) {
+                    try {
+                        mutx.acquire();
+                        Log.d(TAG, "takeoff");
+                        flightController.startTakeoff(new CompletionCallback() {
+                            @Override
+                            public void onResult(DJIError djiError) {
+                                mutx.release();
+                                if (djiError != null) {
+                                    Log.d(TAG, "dji error " + djiError);
+                                    DialogUtils.showDialogBasedOnError(getContext(), djiError);
+                                }
+                            }
+                        });
+                    } catch (Exception e) {
+                        Log.e("error ", e.getMessage());
+                    }
+                } else if (text.equalsIgnoreCase("land")) {
+                    try {
+                        mutx.acquire();
+                        Log.d(TAG, "landing");
+                        flightController.startLanding(new CompletionCallback() {
+                            @Override
+                            public void onResult(DJIError djiError) {
+                                mutx.release();
+                                if (djiError != null) {
+                                    Log.d(TAG, "dji error " + djiError);
+                                    DialogUtils.showDialogBasedOnError(getContext(), djiError);
+                                }
+                            }
+                        });
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage());
+                    }
                 }
-
-                if(text.equalsIgnoreCase("up")){
-                    flightController.startTakeoff(new CompletionCallback() {
-                        @Override
-                        public void onResult(DJIError djiError) {
-                            Log.d("shit", "dji error "+djiError);
-                            DialogUtils.showDialogBasedOnError(getContext(), djiError);
-                        }
-                    });
-                }
-                 if(text.equalsIgnoreCase("land")){
-                    flightController.startLanding(new CompletionCallback() {
-                        @Override
-                        public void onResult(DJIError djiError) {
-                            DialogUtils.showDialogBasedOnError(getContext(), djiError);
-                        }
-                    });
-                }
-
-
-//                if (text.contains("flight")){
-//                    if (text.contains("takeoff") || text.contains("take off")){
-//                        flightController.startTakeoff(new CompletionCallback() {
-//                            @Override
-//                            public void onResult(DJIError djiError) {
-//                                DialogUtils.showDialogBasedOnError(getContext(), djiError);
-//                            }
-//                        });
-//                    }
-//                    switch (text){
-//                        case "takeoff":
-//                        case "take off":
-//                            flightController.startTakeoff(new CompletionCallback() {
-//                                @Override
-//                                public void onResult(DJIError djiError) {
-//                                    DialogUtils.showDialogBasedOnError(getContext(), djiError);
-//                                }
-//                            });
-//                            break;
-//                        case "land" :
-//                            flightController.startLanding(new CompletionCallback() {
-//                                @Override
-//                                public void onResult(DJIError djiError) {
-//                                    DialogUtils.showDialogBasedOnError(getContext(), djiError);
-//                                }
-//                            });
-//                            break;
-//                        default:
-//                            break;
-//
-//                    }
-//                }
             }
         }
 
         @Override
         public void onError(Exception e) {
-//            Toast.makeText(mainActivity,"speechToText: "+e, Toast.LENGTH_LONG);
-            Log.d("Test","error : "+e);
+            Log.d(TAG, "error : " + e);
         }
 
         @Override
         public void onDisconnected() {
-            Log.d("Test","disconnected : ");
+            Log.d(TAG, "disconnected");
 
         }
     }
