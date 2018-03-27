@@ -1,0 +1,290 @@
+<resources>
+    <string name="app_name">DJI SDK Sample</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="sdk_version">DJI SDK Version: %1$s</string>
+    <!-- Main activity UI string -->
+    <string name="connection_loose">Status: No Product Connected</string>
+    <string name="model_not_available">Firmware version:N/A</string>
+    <string name="product_information">Product Information</string>
+    <string name="sdk_registration_message">SDK Registration Failed. Please check the bundle ID and your network
+        connectivity
+    </string>
+    <string name="sdk_registration_success_message">SDK Registered Successfully</string>
+    <string name="sdk_registration_doing_message">Registering, pls wait...</string>
+
+    <string name="activity_component_list">Component List</string>
+
+    <string name="success">Success</string>
+
+    <!-- Component list -->
+    <string name="component_listview_component">Component</string>
+    <string name="component_listview_camera">Camera</string>
+    <string name="component_listview_gimbal">Gimbal</string>
+    <string name="component_listview_flight_controller">Flight Controller</string>
+    <string name="component_listview_battery">Battery</string>
+    <string name="component_listview_airlink">Air Link</string>
+    <string name="component_listview_remote_controller">Remote Controller</string>
+    <string name="component_listview_mobile_remote_controller">Mobile Remote Controller</string>
+    <string name="component_listview_mission_manager">Mission Manager (Deprecated)</string>
+    <string name="component_listview_timeline_mission_control">Timeline Mission Control</string>
+    <string name="component_listview_bluetooth">Bluetooth</string>
+
+
+    <string name="component_listview_sdk_4.0">4.0 New Interfaces</string>
+    <string name="component_listview_waypoint_mission_operator">New Waypoint Mission Operator</string>
+    <string name="component_listview_keyed_interface">Keyed Interface Sample</string>
+
+    <string name="component_listview_sdk_4_1">4.1 New Interfaces</string>
+    <string name="component_listview_app_activation">App Activation and ADSB View</string>
+
+    <!-- Camera list -->
+    <string name="camera_subtitle_general">General</string>
+    <string name="camera_listview_push_info">Push Info</string>
+    <string name="camera_listview_iso">Set/Get ISO</string>
+    <string name="camera_subtitle_shoot_photo">Shoot Photo</string>
+    <string name="camera_listview_shoot_single_photo">Shoot Single Photo</string>
+    <string name="camera_listview_shoot_interval_photo">Shoot Interval Photo</string>
+    <string name="camera_subtitle_record_video">Record Video</string>
+    <string name="camera_listview_record_video">Record Video</string>
+    <string name="camera_subtitle_playback">Playback</string>
+    <string name="camera_listview_playback_push_info">Playback Push Info</string>
+    <string name="camera_listview_playback_push_info_description">Playback State Information</string>
+    <string name="camera_listview_playback_command">Playback Commands</string>
+    <string name="camera_listview_playback_download">Playback Download</string>
+    <string name="camera_subtitle_media_download">Media Download</string>
+    <string name="camera_listview_download_media">Download Media</string>
+    <string name="camera_listview_media_playback">Media Playback</string>
+    <string name="moveToPosition">Skip Time</string>
+
+    <!-- Gimbal list -->
+    <string name="gimbal_subtitle_rotate_gimbal">Rotate Gimbal</string>
+    <string name="gimbal_listview_push_info">Push Info</string>
+    <string name="gimbal_listview_rotate_gimbal">Rotate With Speed</string>
+    <string name="gimbal_listview_gimbal_capability">Gimbal Capability</string>
+
+    <!-- Battery list -->
+    <string name="battery_subtitle">Battery Information</string>
+    <string name="battery_listview_push_info">Push Info</string>
+    <string name="battery_listview_set_get_discharge_day">Set/Get Discharge Day</string>
+
+    <!-- Remote controller list -->
+    <string name="remote_controller_subtitle">Remote Controller Information</string>
+    <string name="remote_controller_listview_push_info">Push Info</string>
+
+    <!-- Flight controller list -->
+    <string name="flight_controller_subtitle_general">General</string>
+    <string name="flight_controller_listview_compass_calibration">Compass Calibration</string>
+    <string name="flight_controller_listview_flight_limitation">Flight Limitation</string>
+    <string name="flight_controller_subtitle_orientation_mode">Orientation Mode</string>
+    <string name="flight_controller_listview_orientation_mode">Orientation Mode</string>
+    <string name="flight_controller_subtitle_virtual_stick">Virtual Stick</string>
+    <string name="flight_controller_listview_virtual_stick">Virtual Stick</string>
+    <string name="flight_controller_subtitle_intelligent_flight_assistant">Intelligent Flight Assistant</string>
+    <string name="flight_controller_listview_intelligent_flight_assistant">Intelligent Flight Assistant</string>
+
+    <!-- Airlink list -->
+    <string name="airlink_subtitle_wifi_airlink">WiFi Airlink</string>
+    <string name="airlink_listview_wifi_set_get_ssid">Set/Get WiFi SSID</string>
+    <string name="airlink_listview_wifi_reboot_wifi">Reboot WiFi</string>
+    <string name="airlink_subtitle_lb_airlink">Light Bridge Airlink</string>
+    <string name="airlink_listview_lb_set_get_channel">Set/Get LBAirlink Channel</string>
+
+    <!--*************** Camera string set ***************-->
+    <!-- Shoot Single Photo View -->
+    <string name="shoot_single_photo">Shoot Single Photo</string>
+    <string name="shoot_single_photo_descritpion">Shoot Single Photo</string>
+
+    <!-- Record Video View -->
+    <string name="record_video_start_record">Start Record</string>
+    <string name="record_video_stop_record">Stop Record</string>
+    <string name="record_video_initial_time">00:00:00</string>
+
+    <!-- Fetch Media View -->
+    <string name="fetch_media_view_description">Fetch Media</string>
+    <string name="fetch_media_view_fetch_thumbnail">Fetch Thumbnail</string>
+    <string name="fetch_media_view_fetch_preview">Fetch Preview</string>
+    <string name="fetch_media_view_fetch_media">FetchMedia</string>
+    <string name="not_support_mediadownload">This product does not support media download function.</string>
+    <string name="support_mediadownload">This product supports media download function.</string>
+
+    <!-- Playback Download View -->
+    <string name="playback_download_description">In this mode, you could download the media file using the playback
+        mode. The pre-condition is that camera is in the multiple edit mode.
+    </string>
+    <string name="playback_download_select_0">1st Photo</string>
+    <string name="playback_download_select_1">2nd Photo</string>
+    <string name="playback_download_download">Download</string>
+    <string name="not_support_playback">This product does not support playback function.</string>
+    <string name="support_playback">This product supports playback function.</string>
+
+    <!--*************** Gimbal string set ***************-->
+    <!-- Move Gimbal In Speed -->
+    <string name="move_gimbal_in_speed_up">Up</string>
+    <string name="move_gimbal_in_speed_stop">Stop</string>
+    <string name="move_gimbal_in_speed_down">Down</string>
+    <string name="move_gimbal_in_speed_description">This view will show how to rotate the gimbal in speed. Please set up
+        a timer for keeping sending the rotateGimbalBySpeed with specific values and send null, null, null using
+        rotateGimbalInSpeed to the aircraft.
+    </string>
+
+    <!--*************** Flight controller string set ***************-->
+    <!-- Compass Calibration View -->
+    <string name="compass_calibration_start_calibration">Start Calibration</string>
+    <string name="compass_calibration_stop_calibration">Stop Calibration</string>
+    <string name="compass_calibration_description">This view is for calibration. The calibration process includes two
+        parts: horizontal calibration and vertical calibration
+    </string>
+
+    <string name="flight_limitation_set_height_limitation">Set Height Limitation</string>
+    <string name="flight_limitation_toggle_enable_radius_limitation">Limitation ON/OFF</string>
+    <string name="flight_limitation_set_radius_limitation">Set Radius Limitation</string>
+    <string name="flight_limitation_description">The height limitation is always on, the range of the flight limitation
+        is [20, 500]. The range of the radius flight limitation is [15, 500].
+    </string>
+
+    <!-- Orientation Mode View -->
+    <string name="orientation_mode_description">Current Orientation Mode is</string>
+    <string name="orientation_mode_home_lock">Home Lock</string>
+    <string name="orientation_mode_course_lock">Course Lock</string>
+    <string name="orientation_mode_aircraft_heading">Aircraft Heading</string>
+
+    <string name="intelligent_flight_assistant_description">This view is for Intelligent Flight Assistant.</string>
+
+    <!--*************** Airlink string set ***************-->
+    <!-- Set Get LB Airlink Channel View -->
+    <string name="set_get_lb_airlink_channel_description">This view will help you understand how to setLBAirlinkChannel.
+        Before send setLBAirlinkChannel, the mode of the LB should be in Manual mode. For the auto mode, it will be more
+        efficient for the remote control to choose the best channel
+    </string>
+
+    <!-- Set Get WiFi Airlink SSID View -->
+    <string name="set_get_wifi_airlink_ssid_description">This view will help you understand how to setWiFiAirlinkSSID.
+        After setting SSID, Password and frequency, please reboot the WiFi so that it would work immediately.
+    </string>
+
+    <!-- Reboot WiFi Airlink View -->
+    <string name="reboot_wifi_airlink_description">This view will help you understand how to use the rebootWiFiAirlink.
+        After setting SSID, Password and frequency, please reboot the WiFi so that it would work immediately.
+    </string>
+    <string name="reboot_wifi_airlink_reboot_wifi">Reboot WiFi</string>
+    <string name="reboot_wifi_airlink_hint">If you reboot the WiFi, the connection between product and mobile phone
+        device might lose.
+    </string>
+
+
+    <!-- media playback -->
+    <string name="video_playback_state_push_info">Video playback state</string>
+    <string name="Message_Waiting">Please wait...</string>
+    <string name="sync_file_title">Sync file</string>
+    <string name="sync_success">Sync file success</string>
+    <string name="playback_disconnected">Disconnected</string>
+
+    <!-- keyed interface-->
+    <string name="component_keyed_interface">key</string>
+    <string name="battery_title">Get battery level</string>
+    <string name="battery_value">%1$s %</string>
+    <string name="camera_title">Switch Camera Mode</string>
+    <string name="camera_value">Current Mode: %1$s</string>
+    <string name="gps_title">Start Listening</string>
+    <string name="gps_value">Lat: %1$s - Long: %2$s</string>
+    <string name="exposure_title">Get Exposure Setting</string>
+    <string name="exposure_value">%1$s</string>
+    <string name="search_for_demo">Search for demo</string>
+
+    <!-- video feeder related interface-->
+    <string name="video_feeder_single_camera_product_title">*Inspire1/M100/P3/P4/Mavic... \n Only one live video is available"</string>
+    <string name="video_feeder_m600_lb2_title">*M600/LB2 products(with two cameras) \n with follow options:</string>
+    <string name="video_feeder_m210_two_camera_title">*M210 with two cameras:</string>
+    <string name="product_with_multiple_gimbals">*Product with multiple gimbals:</string>
+    <string name="video_feeder_enable_single">\tEnable EXT(Single Mode)</string>
+    <string name="video_feeder_disable_single">\tDisable EXT(Dual Mode)</string>
+    <string name="video_feeder_lb_only">LB Only</string>
+    <string name="video_feeder_ext_only">EXT Only</string>
+    <string name="video_feeder_both_lb_ext">LB+EXT</string>
+    <string name="video_feeder_hdmi_only">HDMI Only</string>
+    <string name="video_feeder_av_only">AV Only</string>
+    <string name="video_feeder_both_hdmi_av">HDMI+AV</string>
+    <string name="video_feeder_right_fpv">Right+FPV</string>
+    <string name="video_feeder_left_fpv">Left+FPV</string>
+    <string name="video_feeder_left_right">Left+Right</string>
+    <string name="component_listview_video_feeder">Video Feeder View</string>
+
+
+    <!-- FROM OUTSIDE SAJJA-->
+
+        <string name="app_version">SpeechKit SampleApp v2.2.4</string>
+
+        <string name="title_activity_asr">Speech Recognition</string>
+        <string name="title_activity_nlu">Speech and Natural Language</string>
+        <string name="title_activity_text_nlu">Text and Natural Language</string>
+        <string name="title_activity_tts">Speech Synthesis</string>
+
+        <string name="title_activity_audio">Audio Playback</string>
+
+        <string name="title_activity_config">Configuration</string>
+        <string name="title_activity_about">About</string>
+
+
+        <string name="reco_type_label">Recognition Type / Language Model</string>
+        <string name="dictation">Dictation</string>
+        <string name="search">Search</string>
+        <string name="tv">Television</string>
+
+        <string name="nlu_context_tag_label">NLU Context Tag</string>
+        <string name="detection_type_label">Detection Type</string>
+        <string name="long_endpointer">Long</string>
+        <string name="short_endpointer">Short</string>
+        <string name="none">None</string>
+
+        <string name="progressive_results_label">Progressive Results</string>
+
+        <string name="text_input_label">Text Input</string>
+        <string name="text_input_missing">Missing Text Input</string>
+        <string name="transaction_with_service">transactionWithService()</string>
+
+        <string name="tts_text_label">What would you like to have spoken?</string>
+        <string name="tts_text">This is a test of speech synthesis from Nuance Communications.</string>
+
+        <string name="repetitions_label">Repetitions</string>
+        <string name="default_repetitions">1</string>
+
+        <string name="language_label">Language Code</string>
+        <string name="default_language">eng-USA</string>
+
+        <string name="logs_label">logs</string>
+        <string name="clear_logs_label">clear</string>
+
+        <string name="speak_string">speakString()</string>
+        <string name="cancel">cancel</string>
+        <string name="pause">pause</string>
+
+        <string name="recognize">recognize()</string>
+        <string name="recognize_with_service">recognizeWithService()</string>
+        <string name="playing">Playing..</string>
+        <string name="listening">Listening..</string>
+        <string name="processing">Processing..</string>
+
+        <string name="enqueue">enqueue()</string>
+
+        <string name="config_text">All fields can be modified in Configuration.java</string>
+
+        <string name="server_host">SERVER_HOST</string>
+        <string name="server_port">SERVER_PORT</string>
+        <string name="app_id">APP_ID</string>
+        <string name="app_key">APP_KEY</string>
+        <string name="nlu_context_tag">NLU_CONTEXT_TAG</string>
+
+        <string name="about_docs">Documentation, SDK Downloads, Account Settings, and more can be found at: &lt;a&gt;http://developer.nuance.com/&lt;/a&gt;</string>
+        <string name="about_questions">Have questions? Email us at: &lt;a&gt;developerrelations@nuance.com&lt;/a&gt;</string>
+        <string name="about_components">This application was tested with:&lt;br /&gt;</string>
+        <string name="bullet_point">\u2022 </string>
+
+
+    <!-- Paste Speech to Text information here -->
+    <string name="speech_text_username">e30300d8-d6df-4c0a-a6a8-dcba992e7f5b</string>
+    <string name="speech_text_password">qeyHnixzSMj0</string>
+    <string name="speech_text_url">https://stream.watsonplatform.net/speech-to-text/api</string>
+
+
+</resources>
