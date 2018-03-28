@@ -282,8 +282,8 @@
 
 
     <!-- Paste Speech to Text information here -->
-    <string name="speech_text_username">e30300d8-d6df-4c0a-a6a8-dcba992e7f5b</string>
-    <string name="speech_text_password">qeyHnixzSMj0</string>
+    <string name="speech_text_username">a9bef47d-4d11-4915-b345-aac1bd559bb0</string>
+    <string name="speech_text_password">e45ML3xTy6L0</string>
     <string name="speech_text_url">https://stream.watsonplatform.net/speech-to-text/api</string>
 
 
