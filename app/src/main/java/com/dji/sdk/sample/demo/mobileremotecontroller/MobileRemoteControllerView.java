@@ -351,7 +351,7 @@ public class MobileRemoteControllerView extends RelativeLayout
                     text = text.trim();
                 }
 
-                Log.d(TAG, "Text recrodnized as " + text);
+                Log.d(TAG, "Text recognized as " + text);
 
                 mainActivity.runOnUiThread(new Runnable() {
                     @Override
@@ -360,10 +360,10 @@ public class MobileRemoteControllerView extends RelativeLayout
                     }
                 });
 
-                if (text.equalsIgnoreCase("up")) {
+                if (text.equalsIgnoreCase("start")) {
                     try {
                         mutx.acquire();
-                        Log.d(TAG, "takeoff");
+                        Log.d(TAG, "TAKEOFF");
                         flightController.startTakeoff(new CompletionCallback() {
                             @Override
                             public void onResult(DJIError djiError) {
@@ -377,10 +377,10 @@ public class MobileRemoteControllerView extends RelativeLayout
                     } catch (Exception e) {
                         Log.e("error ", e.getMessage());
                     }
-                } else if (text.equalsIgnoreCase("land")) {
+                } else if (text.equalsIgnoreCase("stop")) {
                     try {
                         mutx.acquire();
-                        Log.d(TAG, "landing");
+                        Log.d(TAG, "LANDING");
                         flightController.startLanding(new CompletionCallback() {
                             @Override
                             public void onResult(DJIError djiError) {
@@ -400,12 +400,12 @@ public class MobileRemoteControllerView extends RelativeLayout
 
         @Override
         public void onError(Exception e) {
-            Log.d(TAG, "error : " + e);
+            Log.e(TAG, "error : " + e);
         }
 
         @Override
         public void onDisconnected() {
-            Log.d(TAG, "disconnected");
+            Log.e(TAG, "disconnected");
 
         }
     }
